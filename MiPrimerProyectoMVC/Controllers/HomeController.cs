@@ -8,7 +8,7 @@ namespace MiPrimerProyectoMVC.Controllers
 {
     public class HomeController : Controller
     {
-        // GET: Home
+        // GET: Home 
         //localhost:xxxx/home/index
         public ActionResult Index()
         {
