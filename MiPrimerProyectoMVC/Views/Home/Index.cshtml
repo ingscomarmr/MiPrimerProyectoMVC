@@ -1,1 +1,7 @@
-﻿<h2 class="page-header">Index view</h2>
+﻿@{ 
+    ViewBag.TitlePage = "Inicio";
+}
+
+<h2 class="page-header">Index view</h2>
+<h3>@ViewBag.Datos</h3>
+<a href="~/Home/Estudiantes">Ver Estudiantes</a>

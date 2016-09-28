@@ -1,0 +1,62 @@
+﻿@model Model.Model.ESTUDIANTE
+@{
+    ViewBag.TitlePage = "Editar Estudiante";
+    string MsgDisplay = string.IsNullOrEmpty(ViewBag.Mensage) ? "none" : "inline";
+}
+
+<!-- Mensaje de Error -->
+<div id="alerta-form" class="alert alert-warning text-center" style="display:@MsgDisplay">
+    @ViewBag.Mensage
+</div>
+
+<br/>
+<br/>
+<!--Usando htmlhelper de MVC para no tener que poner el codigo-->
+@using (Html.BeginForm("EstudianteGuardar", "Home", FormMethod.Post)) {
+
+    @Html.HiddenFor(x => x.ID);
+
+        <div class="form-group">
+        <!--Este codigo es como poner html pero con ayuda del MVC-->
+        @Html.LabelFor(x => x.NOMBRE)
+        @Html.TextBoxFor(x => x.NOMBRE, new { @class = "form-control" })
+        </div>
+        <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+        <div class="form-group">
+            <label>APELLIDO</label>
+            <input type="text" name="APELLIDO" id="APELLIDO" class="form-control" value="@Model.APELLIDO" />
+        </div>
+
+        <div class="form-group">
+            <!--Este codigo es como poner html pero con ayuda del MVC-->
+            @Html.LabelFor(x => x.EMAIL)
+            @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
+        </div>
+
+        <div class="form-group">
+            <!--Este codigo es como poner html pero con ayuda del MVC-->
+            @Html.LabelFor(x => x.EDAD)
+            @Html.TextBoxFor(x => x.EDAD, new { @class = "form-control" })
+        </div>
+
+       <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+        <div class="form-group">
+            <label>FECHA  DE NACIMIENTO</label>
+            <input type="text" name="FECHA_NACIMIENTO" id="FECHA_NACIMIENTO" class="form-control" value="@Model.FECHA_NACIMIENTO.ToString()" />
+        </div>
+
+        <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+        <div class="form-group">
+            <label>SEXO</label>
+            <select name="SEXO" id="SEXO" class="form-control">
+                <option value="0" @(Model.SEXO==0? "selected" : "")>Mujer</option>
+                <option value="1" @(Model.SEXO==1? "selected" : "")>Hombre</option>
+            </select>
+        </div>
+
+        <hr />
+        <button type="submit" class="btn btn-primary">Guardar</button>
+        <a href="~/Home/EstudianteEliminar?id=@Model.ID"><input type="button" class="btn btn-warning" value="Eliminar"></a>
+        <button class="btn btn-default">Limpiar</button>
+}
+

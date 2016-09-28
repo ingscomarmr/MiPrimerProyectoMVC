@@ -1,3 +1,16 @@
-﻿<h2 class="page-header">
+﻿@{ 
+    ViewBag.TitlePage = "Estudiantes";
+    List<Model.Model.ESTUDIANTE> estudiantesList = ViewBag.EstudiantesList;
+}
+<h2 class="page-header">
     Estudiantes
 </h2>
+<div>
+
+    <ul>
+        @foreach (Model.Model.ESTUDIANTE e in estudiantesList) {
+            <li><b>ID:</b>@e.ID <b>Nombre:</b>@e.NOMBRE <a href="~/home/EstudianteEditar?id=@e.ID">Editar</a></li>
+        }
+    </ul>
+
+</div>
