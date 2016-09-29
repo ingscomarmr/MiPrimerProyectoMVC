@@ -11,7 +11,12 @@ namespace Model.Model
     [Table("DEV_001.ESTUDIANTE")]
     public partial class ESTUDIANTE
     {
-        //la sequence se tuvo que meter por medio de un trigger
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
+        public ESTUDIANTE()
+        {
+            ESTUDIANTE_CURSO = new HashSet<ESTUDIANTE_CURSO>();
+        }
+
         public decimal ID { get; set; }
 
         [Required]
@@ -30,6 +35,9 @@ namespace Model.Model
         public DateTime? FECHA_NACIMIENTO { get; set; }
 
         public decimal SEXO { get; set; }
+
+        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
+        public virtual ICollection<ESTUDIANTE_CURSO> ESTUDIANTE_CURSO { get; set; }
 
         #region GetEstudianteList
         public static List<ESTUDIANTE> GetEstudianteList()
@@ -107,8 +115,11 @@ namespace Model.Model
             {
                 using (var ctx = new Dev001Context())
                 {
-                    e = ctx.ESTUDIANTE.Where(x => x.ID == id).SingleOrDefault();
-                }
+                    e = ctx.ESTUDIANTE
+                        .Include("ESTUDIANTE_CURSO") //incluir el objeto para que Entity lo incluya en su consulta
+                        .Include("ESTUDIANTE_CURSO.CURSO") //incluir tambien el objeto del curso
+                        .Where(x => x.ID == id).SingleOrDefault();
+                } 
 
             }
             catch (Exception ex)

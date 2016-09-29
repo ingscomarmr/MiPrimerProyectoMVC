@@ -23,9 +23,19 @@ namespace MiPrimerProyectoMVC.Controllers
             return View();
         }
 
+        public ActionResult EstudiantesVer(int id)
+        {
+            if (id == 0)
+            {
+                return Redirect("~/home/Estudiantes"); //retorna
+            }            
+            return View(ESTUDIANTE.GetEstudiante(id));            
+        }
+
         public ActionResult EstudianteEditar(int id, string mensage)
         {
-            if (id == 0) {
+            if (id == 0)
+            {
                 return Redirect("~/home/Estudiantes"); //retorna
             }
             ViewBag.Mensage = mensage;
@@ -35,7 +45,8 @@ namespace MiPrimerProyectoMVC.Controllers
         public ActionResult EstudianteGuardar(ESTUDIANTE e)
         {            
             ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante
-            return Redirect("~/home/EstudianteEditar?id=" + e.ID + "&mensage=Datos Guardados"); //retorna con el mismo ID
+            //return Redirect("~/home/EstudianteEditar?id=" + e.ID + "&mensage=Datos Guardados"); //retorna con el mismo ID
+            return Redirect("~/home/Estudiantes"); //retorna
         }
 
         public ActionResult EstudianteEliminar(int id)

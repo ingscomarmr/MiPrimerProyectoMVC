@@ -59,15 +59,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="TestModel.cs" />
+    <Compile Include="Model\CURSO.cs" />
     <Compile Include="Model\Dev001Context.cs" />
     <Compile Include="Model\ESTUDIANTE.cs" />
+    <Compile Include="Model\ESTUDIANTE_CURSO.cs" />
     <Compile Include="Model\USUARIO.cs" />
+    <Compile Include="TestModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
   <ItemGroup>
     <None Include="App.config" />
+    <None Include="ClassDiagram1.cd" />
     <None Include="packages.config" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

@@ -5,12 +5,35 @@
 <h2 class="page-header">
     Estudiantes
 </h2>
-<div>
 
-    <ul>
-        @foreach (Model.Model.ESTUDIANTE e in estudiantesList) {
-            <li><b>ID:</b>@e.ID <b>Nombre:</b>@e.NOMBRE <a href="~/home/EstudianteEditar?id=@e.ID">Editar</a></li>
-        }
-    </ul>
-
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <td style="width:200px"><b>Nombre</b></td>
+            <td style="width:200px"><b>Email</b></td>            
+            <td><b>Edad</b></td>
+            <td><b>Fecha de Nacimiento</b></td>            
+            <td><b>Sexo</b></td>
+            <td style="width:100px"></td>
+            <td style="width:100px"></td>
+        </tr>
+    </thead>
+    <tbody>
+           @foreach (Model.Model.ESTUDIANTE e in estudiantesList)
+           {
+               <tr>
+                   <td>@(e.NOMBRE + " " + e.APELLIDO)</td>
+                   <td>@e.EMAIL</td>
+                   <td>@(e.EDAD.ToString() + " años")</td>
+                   <td>@e.FECHA_NACIMIENTO.ToString()</td>                   
+                   <td>@(e.SEXO==1? "Hombre" : "Mujer")</td>
+                   <td>
+                       <a class="btn btn-xs btn-primary btn-block" href="~/home/EstudiantesVer?id=@e.ID">Ver Datos</a>
+                   </td>
+                   <td style="width:100px">
+                       <a class="btn btn-xs btn-primary btn-block" href="~/home/EstudianteEditar/@e.ID">Editar Datos</a>
+                   </td>
+               </tr>            
+           }
+    </tbody>
+</table>

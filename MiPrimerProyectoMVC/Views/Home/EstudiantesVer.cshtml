@@ -1,0 +1,56 @@
+﻿@model Model.Model.ESTUDIANTE
+@{
+    string nombreCompleto = Model.NOMBRE + " " + Model.APELLIDO;
+    ViewBag.TitlePage = "Datos de " + nombreCompleto;
+    string sexoStr = (Model.SEXO == 1 ? "Hombre" : "Mujer");
+}
+<ol class="breadcrumb">
+    <li><a href="~/Home/Estudiantes">Estudiantes</a></li>
+    <li class="active">@nombreCompleto</li>
+</ol>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Datos del Estudiante</div>
+    <div class="panel-body">
+        <dl class="dl-horizontal">
+            <dt>Nombre:</dt>
+            <dd>@nombreCompleto</dd>
+            <dt>Email</dt>
+            <dd>@Model.EMAIL</dd>
+            <dt>Edad</dt>
+            <dd>@(Model.EDAD)</dd>
+            <dt>Fecha de Nacimiento</dt>
+            <dd>@Model.FECHA_NACIMIENTO.ToString()</dd>
+            <dt>Sexo</dt>
+            <dd>@(sexoStr)</dd>
+
+        </dl>
+    </div>
+</div>
+
+<div class="panel panel-default">
+    <div class="panel-heading">Notas de Cursos</div>
+    <div class="panel-body">
+        <table class="table">
+            <thead>
+                <tr>
+                    <td><b>Curso</b></td>
+                    <td style="width:60px"><b>Puntos</b></td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var c in Model.ESTUDIANTE_CURSO) {
+                        <tr>
+                            <td>
+                                @c.CURSO.NOMBRE
+                            </td>
+                            <td class="text-right">
+                                @c.PUNTOS_CURSO
+                            </td>
+                        </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+
+</div>
