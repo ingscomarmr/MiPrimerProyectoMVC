@@ -27,13 +27,17 @@ namespace Model.Model
         [StringLength(100)]
         public string APELLIDO { get; set; }
 
+        [Required]
         [StringLength(100)]
         public string EMAIL { get; set; }
 
+        [Required]
         public decimal EDAD { get; set; }
 
-        public DateTime? FECHA_NACIMIENTO { get; set; }
+        [Required]
+        public DateTime FECHA_NACIMIENTO { get; set; }
 
+        [Required]
         public decimal SEXO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

@@ -34,23 +34,34 @@ namespace MiPrimerProyectoMVC.Controllers
 
         public ActionResult EstudianteEditar(int id, string mensage)
         {
-            if (id == 0)
+            /*if (id == 0)
             {
                 return Redirect("~/home/Estudiantes"); //retorna
-            }
+            }*/
             ViewBag.Mensage = mensage;
-            return View(ESTUDIANTE.GetEstudiante(id));
+            return View(id==0? new ESTUDIANTE() : ESTUDIANTE.GetEstudiante(id));
         }
 
         public ActionResult EstudianteGuardar(ESTUDIANTE e)
-        {            
-            ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante
-            //return Redirect("~/home/EstudianteEditar?id=" + e.ID + "&mensage=Datos Guardados"); //retorna con el mismo ID
-            return Redirect("~/home/Estudiantes"); //retorna
+        {
+            if (ModelState.IsValid) //valida si el modelo es correcto
+            {
+                ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante
+                //return Redirect("~/home/EstudianteEditar?id=" + e.ID + "&mensage=Datos Guardados"); //retorna con el mismo ID
+                return Redirect("~/home/Estudiantes"); //retorna
+            }
+            else {
+                return View("~/views/home/EstudianteEditar.cshtml", e); //retorna
+            }
+            
         }
 
         public ActionResult EstudianteEliminar(int id)
         {
+            if (id <= 0) {
+                //no tiene nada que eliminar
+                return Redirect("~/home/Estudiantes"); //retorna
+            }
             ESTUDIANTE.DeleteEstudiante(id); //Eliminar el estudiante
             return Redirect("~/home/Estudiantes"); //retorna
         }

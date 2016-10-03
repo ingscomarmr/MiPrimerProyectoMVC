@@ -1,7 +1,7 @@
 ﻿@model Model.Model.ESTUDIANTE
 @{
     ViewBag.TitlePage = "Editar Estudiante";
-    string MsgDisplay = string.IsNullOrEmpty(ViewBag.Mensage) ? "none" : "inline";
+    string MsgDisplay = string.IsNullOrEmpty(ViewBag.Mensage) ? "none" : "inline";    
 }
 
 <!-- Mensaje de Error -->
@@ -18,31 +18,36 @@
 
         <div class="form-group">
         <!--Este codigo es como poner html pero con ayuda del MVC-->
-        @Html.LabelFor(x => x.NOMBRE)
-        @Html.TextBoxFor(x => x.NOMBRE, new { @class = "form-control" })
+            @Html.LabelFor(x => x.NOMBRE)
+            @Html.TextBoxFor(x => x.NOMBRE, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.NOMBRE,null, new { @class="label label-danger"})
         </div>
-        <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+        
         <div class="form-group">
-            <label>APELLIDO</label>
-            <input type="text" name="APELLIDO" id="APELLIDO" class="form-control" value="@Model.APELLIDO" />
+            @Html.LabelFor(x => x.APELLIDO)
+            @Html.TextBoxFor(x => x.APELLIDO, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.APELLIDO, null, new { @class = "label label-danger" })
         </div>
 
         <div class="form-group">
             <!--Este codigo es como poner html pero con ayuda del MVC-->
             @Html.LabelFor(x => x.EMAIL)
             @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.EMAIL, null, new { @class = "label label-danger" })
         </div>
 
         <div class="form-group">
             <!--Este codigo es como poner html pero con ayuda del MVC-->
             @Html.LabelFor(x => x.EDAD)
             @Html.TextBoxFor(x => x.EDAD, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.EDAD, null, new { @class = "label label-danger" })
         </div>
 
        <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
         <div class="form-group">
-            <label>FECHA  DE NACIMIENTO</label>
-            <input type="text" name="FECHA_NACIMIENTO" id="FECHA_NACIMIENTO" class="form-control" value="@Model.FECHA_NACIMIENTO.ToString()" />
+            @Html.LabelFor(x => x.FECHA_NACIMIENTO)
+            @Html.TextBoxFor(x => x.FECHA_NACIMIENTO, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FECHA_NACIMIENTO, null, new { @class = "label label-danger" })            
         </div>
 
         <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
@@ -52,11 +57,14 @@
                 <option value="0" @(Model.SEXO==0? "selected" : "")>Mujer</option>
                 <option value="1" @(Model.SEXO==1? "selected" : "")>Hombre</option>
             </select>
+            @Html.ValidationMessageFor(x => x.SEXO, null, new { @class = "label label-danger" })
         </div>
 
         <hr />
-        <button type="submit" class="btn btn-primary">Guardar</button>
-        <a href="~/Home/EstudianteEliminar?id=@Model.ID"><input type="button" class="btn btn-warning" value="Eliminar"></a>
-        <button class="btn btn-default">Limpiar</button>
+        <div class="text-center">
+            <button type="submit" class="btn btn-primary">Guardar</button>
+            <a href="~/Home/EstudianteEliminar?id=@Model.ID"><input type="button" class="btn btn-warning" value="Eliminar"></a>
+            <button type="reset" class="btn btn-default">Limpiar</button>
+        </div>       
 }
 
