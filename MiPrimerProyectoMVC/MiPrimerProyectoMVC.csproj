@@ -136,7 +136,10 @@
     <Content Include="assets\css\bootstrap-theme.min.css" />
     <Content Include="assets\css\bootstrap.min.css" />
     <Content Include="assets\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="assets\fonts\loader.gif" />
     <Content Include="assets\js\bootstrap.min.js" />
+    <Content Include="assets\js\init.forms.js" />
+    <Content Include="assets\js\jquery.form.min.js" />
     <Content Include="assets\js\jquery_3_1_1-min.js" />
     <Content Include="Global.asax" />
     <Content Include="scripts\ai.0.22.19-build00125.js" />
@@ -169,6 +172,7 @@
     <Content Include="assets\fonts\glyphicons-halflings-regular.woff2" />
     <Content Include="Views\Home\EstudianteEditar.cshtml" />
     <Content Include="Views\Home\EstudiantesVer.cshtml" />
+    <Content Include="Views\Home\CursosAlumno.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

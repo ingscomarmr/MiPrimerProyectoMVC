@@ -56,6 +56,27 @@ namespace MiPrimerProyectoMVC.Controllers
             
         }
 
+        //para usar ajax se cambia el tipo de vista a JsonResult
+        public JsonResult EstudianteGuardarAjax(ESTUDIANTE e)
+        {
+            var rm = new Model.ResponseModel();
+
+            if (ModelState.IsValid) //valida si el modelo es correcto
+            {
+                rm = ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante                
+                if (rm.response)
+                {
+                    rm.message = "Se guardo correctamente la información!!";
+                    rm.href = Url.Content("~/home/Estudiantes"); //a donde queremos que redireccione
+                }
+            }
+            else {
+                rm.SetResponse(false, "Datos no validos!!!"); //si tenemos un mensaje
+            }
+
+            return Json(rm);
+        }
+
         public ActionResult EstudianteEliminar(int id)
         {
             if (id <= 0) {
@@ -65,5 +86,37 @@ namespace MiPrimerProyectoMVC.Controllers
             ESTUDIANTE.DeleteEstudiante(id); //Eliminar el estudiante
             return Redirect("~/home/Estudiantes"); //retorna
         }
+
+        //vista parcial para mostrar los cursos
+        public PartialViewResult CursosAlumno(int id_estudiante)
+        {
+            //listar todos los cursos disponibles
+            ViewBag.Cursos = Model.Model.CURSO.GetCursos(id_estudiante);
+            //listar cursos que tiene el usuario
+            ViewBag.CursosEstudiante = Model.Model.ESTUDIANTE_CURSO.GetEstudianteCursos(id_estudiante);
+
+            ESTUDIANTE_CURSO es_cur = new ESTUDIANTE_CURSO();
+            es_cur.ID_ESTUDIANTE = id_estudiante;
+            return PartialView(es_cur);
+        }
+
+        public JsonResult GuardarCurso(ESTUDIANTE_CURSO ec) {
+            var rm = new Model.ResponseModel();
+            if (ModelState.IsValid)
+            {
+                rm = ec.Guardar();
+                if (rm.response)
+                {
+                    rm.message = "Se guardo correctamente la información!!";
+                    rm.function = "CargarCursos()"; //mandara a ejecutar una funcion javascript
+                }
+            }
+            else {
+                rm.message = "Datos no validos";
+            }
+           
+            return Json(rm);
+        }
+
     }
 }

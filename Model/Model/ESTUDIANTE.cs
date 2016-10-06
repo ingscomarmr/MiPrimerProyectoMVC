@@ -19,25 +19,27 @@ namespace Model.Model
 
         public decimal ID { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Este datos es requerido")]
         [StringLength(100)]
         public string NOMBRE { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este datos es requerido")]
         [StringLength(100)]
         public string APELLIDO { get; set; }
 
-        [Required]
+        [Required(ErrorMessage = "Este datos es requerido, debe contener el formado de email, ejemplo@email.com")]
         [StringLength(100)]
         public string EMAIL { get; set; }
 
         [Required]
         public decimal EDAD { get; set; }
 
-        [Required]
+        [Required(ErrorMessage ="Es requerido, debe contener el formato YYYY-MM-DD")] //intro mensaje personalizado
+        //[RegularExpression(@"\d\d\d\d-\d\d-\d\d",ErrorMessage ="Debe contener el formato YYYY-MM-DD")]
         public DateTime FECHA_NACIMIENTO { get; set; }
 
         [Required]
+        [Range(0,1, ErrorMessage ="Debe seleccionar entre Mujer y Hombre")]
         public decimal SEXO { get; set; }
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
@@ -64,8 +66,9 @@ namespace Model.Model
         #endregion
 
         #region SaveEstudiante
-        public static void SaveEstudiante(ESTUDIANTE e)
+        public static ResponseModel SaveEstudiante(ESTUDIANTE e)
         {
+            var rm = new ResponseModel();
             try
             {
                 using (var ctx = new Dev001Context())
@@ -81,6 +84,7 @@ namespace Model.Model
                         ctx.Entry(e).State = EntityState.Added;
                     }
                     ctx.SaveChanges();
+                    rm.SetResponse(true, "Datos guardados");
                 }
             }
             catch (Exception ex)
@@ -88,6 +92,7 @@ namespace Model.Model
                 Console.WriteLine("Error SaveEstudiante:{0}", ex.Message);
                 throw;
             }
+            return rm;
         }
         #endregion
 

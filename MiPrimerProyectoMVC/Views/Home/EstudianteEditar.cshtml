@@ -1,70 +1,151 @@
 ﻿@model Model.Model.ESTUDIANTE
 @{
     ViewBag.TitlePage = "Editar Estudiante";
-    string MsgDisplay = string.IsNullOrEmpty(ViewBag.Mensage) ? "none" : "inline";    
+    string MsgDisplay = string.IsNullOrEmpty(ViewBag.Mensage) ? "none" : "inline";
+    string nombreCompleto = Model.NOMBRE + " " + Model.APELLIDO;
+    nombreCompleto = (string.IsNullOrEmpty(nombreCompleto.Trim()) ? "Nuevo Estudiante" : nombreCompleto);
 }
 
-<!-- Mensaje de Error -->
-<div id="alerta-form" class="alert alert-warning text-center" style="display:@MsgDisplay">
-    @ViewBag.Mensage
+<ol class="breadcrumb">
+    <li><a href="~/Home/Estudiantes">Estudiantes</a></li>
+    <li class="active">@nombreCompleto</li>
+</ol>
+
+
+<!--para agregar tabs-->
+<div>
+
+    <!-- Nav tabs -->
+    <ul class="nav nav-tabs" role="tablist">
+        <li role="presentation" class="active"><a href="#datos_alumno" aria-controls="datos_alumno" role="tab" data-toggle="tab">Datos Alumno</a></li>
+        @if (Model.ID > 0)
+        {
+            <li role="presentation"><a href="#cursos_alumno" aria-controls="profile" role="tab" data-toggle="tab">Cursos de Alumno</a></li>
+        }        
+    </ul>
+
+    <!-- Tab panes -->
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="datos_alumno">
+            <br/>
+            <div class="panel panel-default">
+            <div class="panel-heading">Datos del Estudiante</div>
+                 <div class="panel-body">
+                <!--Usando htmlhelper de MVC para no tener que poner el codigo-->
+                @using (Html.BeginForm("EstudianteGuardarAjax", "Home", FormMethod.Post, new { id="form-estudiante"}))
+                {
+
+                    @Html.HiddenFor(x => x.ID);
+
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.NOMBRE)
+                        @Html.TextBoxFor(x => x.NOMBRE, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.NOMBRE, null, new { @class = "label label-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.APELLIDO)
+                        @Html.TextBoxFor(x => x.APELLIDO, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.APELLIDO, null, new { @class = "label label-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.EMAIL)
+                        @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.EMAIL, null, new { @class = "label label-danger" })
+                    </div>
+
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.EDAD)
+                        @Html.TextBoxFor(x => x.EDAD, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.EDAD, null, new { @class = "label label-danger" })
+                    </div>
+
+               <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+                    <div class="form-group">
+                        @Html.LabelFor(x => x.FECHA_NACIMIENTO)
+                        @Html.TextBoxFor(x => x.FECHA_NACIMIENTO, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.FECHA_NACIMIENTO, null, new { @class = "label label-danger" })
+                    </div>
+
+                <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
+                    <div class="form-group">
+                        <label>SEXO</label>
+                        <select name="SEXO" id="SEXO" class="form-control">
+                            <option value="0" @(Model.SEXO == 0 ? "selected" : "")>Mujer</option>
+                            <option value="1" @(Model.SEXO == 1 ? "selected" : "")>Hombre</option>
+                        </select>
+                        @Html.ValidationMessageFor(x => x.SEXO, null, new { @class = "label label-danger" })
+                    </div>
+
+                    <hr />
+                    <div class="text-right">
+                        <button data-ajax="true" type="submit" class="btn btn-primary">Guardar</button>
+                        <a href="~/Home/EstudianteEliminar?id=@Model.ID"><input type="button" class="btn btn-warning" value="Eliminar"></a>
+                        <button type="reset" class="btn btn-default">Limpiar</button>
+                    </div>
+                }
+
+    </div>
+            </div>
+        </div>
+
+        @if (Model.ID > 0)
+        {
+            <div role="tabpanel" class="tab-pane" id="cursos_alumno"></div>
+        }
+        
+      
+    </div>
+
 </div>
 
-<br/>
-<br/>
-<!--Usando htmlhelper de MVC para no tener que poner el codigo-->
-@using (Html.BeginForm("EstudianteGuardar", "Home", FormMethod.Post)) {
 
-    @Html.HiddenFor(x => x.ID);
 
-        <div class="form-group">
-        <!--Este codigo es como poner html pero con ayuda del MVC-->
-            @Html.LabelFor(x => x.NOMBRE)
-            @Html.TextBoxFor(x => x.NOMBRE, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.NOMBRE,null, new { @class="label label-danger"})
-        </div>
+<script>
+    $(document).ready(function () {
+
         
-        <div class="form-group">
-            @Html.LabelFor(x => x.APELLIDO)
-            @Html.TextBoxFor(x => x.APELLIDO, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.APELLIDO, null, new { @class = "label label-danger" })
-        </div>
+        //$("#form-estudiante").submit(function () {
 
-        <div class="form-group">
-            <!--Este codigo es como poner html pero con ayuda del MVC-->
-            @Html.LabelFor(x => x.EMAIL)
-            @Html.TextBoxFor(x => x.EMAIL, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.EMAIL, null, new { @class = "label label-danger" })
-        </div>
+        //    var form = $(this);
 
-        <div class="form-group">
-            <!--Este codigo es como poner html pero con ayuda del MVC-->
-            @Html.LabelFor(x => x.EDAD)
-            @Html.TextBoxFor(x => x.EDAD, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.EDAD, null, new { @class = "label label-danger" })
-        </div>
+        //    $.ajax({
+        //        dataType: 'JSON',
+        //        type: 'POST',
+        //        url: form.attr("action"),
+        //        data: form.serialize(),
+        //        success: function (r) {
+        //            if (r.response) {
+        //                alert(r.message);
+        //                location.href = r.href;
+        //            } else {
+        //                alert(r.message);
+        //            }
+        //        },
+        //        error: function(jqXHR,textStatus, errorThrow){
+        //            alert(textStatus + ' throw:' + errorThrow);
+        //        }
+        //    });
 
-       <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
-        <div class="form-group">
-            @Html.LabelFor(x => x.FECHA_NACIMIENTO)
-            @Html.TextBoxFor(x => x.FECHA_NACIMIENTO, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.FECHA_NACIMIENTO, null, new { @class = "label label-danger" })            
-        </div>
+        //    return false; //para cancelar el submit porque ajax realizaria la funcion
+        //});
 
-        <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
-        <div class="form-group">
-            <label>SEXO</label>
-            <select name="SEXO" id="SEXO" class="form-control">
-                <option value="0" @(Model.SEXO==0? "selected" : "")>Mujer</option>
-                <option value="1" @(Model.SEXO==1? "selected" : "")>Hombre</option>
-            </select>
-            @Html.ValidationMessageFor(x => x.SEXO, null, new { @class = "label label-danger" })
-        </div>
+        @if (Model.ID > 0) {
+            <text> //la etiqueta text es para que la funcion javascriot CargarCursos no la tome como que es parte de C#
+            CargarCursos();
+            </text>
+        }
+    });
 
-        <hr />
-        <div class="text-center">
-            <button type="submit" class="btn btn-primary">Guardar</button>
-            <a href="~/Home/EstudianteEliminar?id=@Model.ID"><input type="button" class="btn btn-warning" value="Eliminar"></a>
-            <button type="reset" class="btn btn-default">Limpiar</button>
-        </div>       
-}
+    //function que carga los cursos
+    function CargarCursos() {
+        //alert('Carga cursos');
+        $("#cursos_alumno").load('@Url.Content("~/home/CursosAlumno?id_estudiante=" + Model.ID)');
+    }
+</script>
 
+       
