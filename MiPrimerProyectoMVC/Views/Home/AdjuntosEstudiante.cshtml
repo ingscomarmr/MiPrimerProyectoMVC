@@ -1,0 +1,28 @@
+﻿<!--Vista parcial para adjuntar documentos-->
+@model Model.Model.ESTUDIANTE_ARCHIVOS_ADJUNTOS
+@{ 
+    List<Model.Model.ESTUDIANTE_ARCHIVOS_ADJUNTOS> adjuntosList = ViewBag.AdjuntosList;
+}
+
+@using (Html.BeginForm("GuardarAdjunto", "Home", FormMethod.Post, new { id = "form-adjunto" }))
+{
+    @Html.HiddenFor(x => x.ID_ESTUDIANTE);
+
+    <div class="form-group">
+        <label>Selecciona un archivo:</label>
+       <input type="file" name="archivo" />
+    </div>
+    
+    <div class="text-right">
+        <button type="submit" data-ajax="true" data-confirm="¿Desea subir este archivo?" class="btn btn-primary">Guardar Adjunto</button>
+    </div>
+}
+<hr />
+
+<!--Listar curso en los que estoy inscrito-->
+<ul class="list-group">
+    @foreach (var ce in adjuntosList)
+    {
+        <li class="list-group-item"><a target="_blank" href="~/uploads/@ce.NOMBRE_ARCHIVO">@ce.NOMBRE_ARCHIVO</a></li>
+    }
+</ul>

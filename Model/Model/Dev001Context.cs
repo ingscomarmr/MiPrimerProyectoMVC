@@ -16,6 +16,7 @@ namespace Model.Model
         public virtual DbSet<ESTUDIANTE> ESTUDIANTE { get; set; }
         public virtual DbSet<USUARIO> USUARIO { get; set; }
         public virtual DbSet<ESTUDIANTE_CURSO> ESTUDIANTE_CURSO { get; set; }
+        public virtual DbSet<ESTUDIANTE_ARCHIVOS_ADJUNTOS> ESTUDIANTE_ARCHIVOS_ADJUNTOS { get; set; }
 
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {
@@ -23,7 +24,13 @@ namespace Model.Model
                 .HasMany(e => e.ESTUDIANTE_CURSO)
                 .WithRequired(e => e.ESTUDIANTE)
                 .HasForeignKey(e => e.ID_ESTUDIANTE)
-                .WillCascadeOnDelete(false);        
+                .WillCascadeOnDelete(false);
+
+            modelBuilder.Entity<ESTUDIANTE>()
+                .HasMany(e => e.ESTUDIANTE_ARCHIVOS_ADJUNTOS)
+                .WithRequired(e => e.ESTUDIANTE)
+                .HasForeignKey(e => e.ID_ESTUDIANTE)
+                .WillCascadeOnDelete(false);
         }
     }
 }

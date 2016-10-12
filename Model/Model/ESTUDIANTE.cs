@@ -15,6 +15,7 @@ namespace Model.Model
         public ESTUDIANTE()
         {
             ESTUDIANTE_CURSO = new HashSet<ESTUDIANTE_CURSO>();
+            ESTUDIANTE_ARCHIVOS_ADJUNTOS = new HashSet<ESTUDIANTE_ARCHIVOS_ADJUNTOS>();
         }
 
         public decimal ID { get; set; }
@@ -44,6 +45,8 @@ namespace Model.Model
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ESTUDIANTE_CURSO> ESTUDIANTE_CURSO { get; set; }
+
+        public virtual ICollection<ESTUDIANTE_ARCHIVOS_ADJUNTOS> ESTUDIANTE_ARCHIVOS_ADJUNTOS { get; set; }
 
         #region GetEstudianteList
         public static List<ESTUDIANTE> GetEstudianteList()

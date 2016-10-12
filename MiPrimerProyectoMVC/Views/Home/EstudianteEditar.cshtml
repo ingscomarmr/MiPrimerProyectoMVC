@@ -17,16 +17,17 @@
 
     <!-- Nav tabs -->
     <ul class="nav nav-tabs" role="tablist">
-        <li role="presentation" class="active"><a href="#datos_alumno" aria-controls="datos_alumno" role="tab" data-toggle="tab">Datos Alumno</a></li>
+        <li role="presentation" class="active"><a href="#datos_estudiante" aria-controls="datos_estudiante" role="tab" data-toggle="tab">Datos</a></li>
         @if (Model.ID > 0)
         {
-            <li role="presentation"><a href="#cursos_alumno" aria-controls="profile" role="tab" data-toggle="tab">Cursos de Alumno</a></li>
+            <li role="presentation"><a href="#cursos_estudiante" aria-controls="cursos_estudiante" role="tab" data-toggle="tab">Cursos</a></li>
+            <li role="presentation"><a href="#adjuntos_estudiante" aria-controls="adjuntos_estudiante" role="tab" data-toggle="tab">Adjuntos</a></li>
         }        
     </ul>
 
     <!-- Tab panes -->
     <div class="tab-content">
-        <div role="tabpanel" class="tab-pane active" id="datos_alumno">
+        <div role="tabpanel" class="tab-pane active" id="datos_estudiante">
             <br/>
             <div class="panel panel-default">
             <div class="panel-heading">Datos del Estudiante</div>
@@ -95,7 +96,8 @@
 
         @if (Model.ID > 0)
         {
-            <div role="tabpanel" class="tab-pane" id="cursos_alumno"></div>
+            <div role="tabpanel" class="tab-pane" id="cursos_estudiante"></div>
+            <div role="tabpanel" class="tab-pane" id="adjuntos_estudiante"></div>
         }
         
       
@@ -136,7 +138,8 @@
 
         @if (Model.ID > 0) {
             <text> //la etiqueta text es para que la funcion javascriot CargarCursos no la tome como que es parte de C#
-            CargarCursos();
+        CargarCursos();
+        CargarAdjuntos();
             </text>
         }
     });
@@ -144,7 +147,12 @@
     //function que carga los cursos
     function CargarCursos() {
         //alert('Carga cursos');
-        $("#cursos_alumno").load('@Url.Content("~/home/CursosAlumno?id_estudiante=" + Model.ID)');
+        $("#cursos_estudiante").load('@Url.Content("~/home/CursosAlumno?id_estudiante=" + Model.ID)');
+    }
+
+    function CargarAdjuntos() {
+        //alert('Carga cursos');
+        $("#adjuntos_estudiante").load('@Url.Content("~/home/AdjuntosEstudiante?id_estudiante=" + Model.ID)');
     }
 </script>
 

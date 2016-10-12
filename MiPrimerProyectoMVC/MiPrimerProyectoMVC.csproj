@@ -173,6 +173,7 @@
     <Content Include="Views\Home\EstudianteEditar.cshtml" />
     <Content Include="Views\Home\EstudiantesVer.cshtml" />
     <Content Include="Views\Home\CursosAlumno.cshtml" />
+    <Content Include="Views\Home\AdjuntosEstudiante.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
@@ -182,6 +183,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="uploads\" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\Model\Model.csproj">

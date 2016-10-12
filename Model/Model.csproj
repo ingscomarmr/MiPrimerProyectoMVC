@@ -62,6 +62,7 @@
     <Compile Include="Model\CURSO.cs" />
     <Compile Include="Model\Dev001Context.cs" />
     <Compile Include="Model\ESTUDIANTE.cs" />
+    <Compile Include="Model\ESTUDIANTE_ARCHIVOS_ADJUNTOS.cs" />
     <Compile Include="Model\ESTUDIANTE_CURSO.cs" />
     <Compile Include="Model\USUARIO.cs" />
     <Compile Include="ResponseModel.cs" />
