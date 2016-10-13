@@ -43,6 +43,9 @@ namespace Model.Model
         [Range(0,1, ErrorMessage ="Debe seleccionar entre Mujer y Hombre")]
         public decimal SEXO { get; set; }
 
+        [StringLength(100,ErrorMessage ="Solo permite 100 caracetes")]
+        public string PWD { get; set; }
+
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<ESTUDIANTE_CURSO> ESTUDIANTE_CURSO { get; set; }
 
@@ -132,6 +135,28 @@ namespace Model.Model
                         .Include("ESTUDIANTE_CURSO.CURSO") //incluir tambien el objeto del curso
                         .Where(x => x.ID == id).SingleOrDefault();
                 } 
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error DeleteEstudiante:{0}", ex.Message);
+                throw;
+            }
+            return e;
+        }
+        #endregion
+
+        #region GetEstudiante email y pwd...
+        public static ESTUDIANTE GetEstudiante(string email, string pwd)
+        {
+            ESTUDIANTE e = new ESTUDIANTE();
+            try
+            {
+                using (var ctx = new Dev001Context())
+                {                    
+                    e = ctx.ESTUDIANTE
+                        .Where(x => x.EMAIL == email && x.PWD == pwd).SingleOrDefault();
+                }
 
             }
             catch (Exception ex)

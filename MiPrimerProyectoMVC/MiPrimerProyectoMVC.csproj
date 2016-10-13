@@ -149,12 +149,15 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Areas\Estudiante\Controllers\LoginController.cs" />
+    <Compile Include="Areas\Estudiante\EstudianteAreaRegistration.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Utilidades\Utils.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Utils\Encrypt.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -174,6 +177,10 @@
     <Content Include="Views\Home\EstudiantesVer.cshtml" />
     <Content Include="Views\Home\CursosAlumno.cshtml" />
     <Content Include="Views\Home\AdjuntosEstudiante.cshtml" />
+    <Content Include="Areas\Estudiante\Views\web.config" />
+    <Content Include="Areas\Estudiante\Views\Shared\Layout.cshtml" />
+    <Content Include="Areas\Estudiante\Views\_Viewstart.cshtml" />
+    <Content Include="Areas\Estudiante\Views\Login\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
