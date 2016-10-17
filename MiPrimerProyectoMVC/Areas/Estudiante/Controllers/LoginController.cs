@@ -15,7 +15,7 @@ namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
             return View();
         }
 
-        [NoLogin]
+        [NoLogin] //parte que no se podra ver cuando ya esta en Login
         public JsonResult GoLogin(string email, string pwd)
         {
             Model.ResponseModel response = new Model.ResponseModel();
