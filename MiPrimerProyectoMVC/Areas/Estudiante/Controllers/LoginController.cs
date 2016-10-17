@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using MiPrimerProyectoMVC.Tags;
 
 namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
 {
@@ -14,7 +15,7 @@ namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
             return View();
         }
 
-
+        [NoLogin]
         public JsonResult GoLogin(string email, string pwd)
         {
             Model.ResponseModel response = new Model.ResponseModel();
@@ -31,12 +32,16 @@ namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
 
                 if (est == null || est.ID <= 0)
                 {
-                    response.response = false;
+                    response.response = false;                    
                     response.message = "Usuario(" + email + ") no encontrado ";
                 }
                 else {
+                    Utils.SessionUtils.AddUserToSession(est.ID.ToString());
                     response.response = true;
-                    response.message = "Login Ok para " + email;
+                    response.message = "Espere un momento, se esta completado la operación...";
+                    response.href = Url.Content("~/Estudiante/Estudiante/Index");//Server.MapPath("~/Estudiante");
+                    
+                    //response.message = "Login Ok para " + email;
                 }
 
                                             
@@ -48,20 +53,10 @@ namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
             return Json(response);
         }
 
-        public JsonResult GoLogout(Model.Model.ESTUDIANTE e)
+        public ActionResult GoLogout(string id)
         {
-            Model.ResponseModel response = new Model.ResponseModel();
-            try
-            {
-                response.response = true;
-                response.message = "Login Ok";
-            }
-            catch (Exception ex)
-            {
-                response.response = false;
-                response.message = "Error:" + ex.Message;
-            }
-            return Json(response);
+            Utils.SessionUtils.DestroyUserSession();
+            return Redirect("~/Estudiante/Login"); //retorna
         }
 
     }

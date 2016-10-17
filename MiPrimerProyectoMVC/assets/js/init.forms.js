@@ -73,8 +73,16 @@
                 }
                 // Redireccionar
                 if (r.href != null) {
-                    if (r.href == 'self') window.location.reload(true);
-                    else redirect(r.href);
+                    if (r.href == 'self') {
+                        
+                        console.log("reload por valor :" + r.href);
+                        window.location.reload(true);
+                    }else{
+                        //redirect(r.href);
+                        console.log("location por valor :" + r.href);
+                        window.location.href = r.href;
+                    } 
+                    
                 }
             }
         });

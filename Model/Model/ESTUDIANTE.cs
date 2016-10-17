@@ -156,6 +156,7 @@ namespace Model.Model
                 {                    
                     e = ctx.ESTUDIANTE
                         .Where(x => x.EMAIL == email && x.PWD == pwd).SingleOrDefault();
+                    Console.WriteLine("Estudiante id:{0}", e.ID);
                 }
 
             }
