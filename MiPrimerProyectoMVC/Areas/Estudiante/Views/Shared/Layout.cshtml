@@ -1,10 +1,19 @@
-﻿
+﻿@{
+    string controlador = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
+
+    Model.Model.ESTUDIANTE estudiante = new Model.Model.ESTUDIANTE();
+    string nombre = "";
+    if (!controlador.Equals("login")) {
+        nombre = estudiante.GetNombreEstudiante(MiPrimerProyectoMVC.Utils.SessionUtils.GetUser());
+    }
+
+}
 <!DOCTYPE html>
 <!--Layout predefinido para no repetir todo el codigo-->
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Estudiante - @ViewBag.TitlePage</title>
+    <title>Estudiante - @ViewBag.TitlePage - @controlador</title>
     <link href="~/assets/css/bootstrap-theme.min.css" rel="stylesheet" />
     <link href="~/assets/css/bootstrap.min.css" rel="stylesheet" />
     <script src="~/assets/js/jquery_3_1_1-min.js"></script>
@@ -62,6 +71,45 @@
 
 </head>
 <body>
+    @if (!controlador.Equals("login"))
+    {
+        <header class="bs-docs-nav navbar navbar-static-top navbar-inverse" id="top">
+            <div class="container">
+                <div class="navbar-header">
+                    <button aria-controls="bs-navbar"
+                            aria-expanded="false" class="collapsed navbar-toggle"
+                            data-target="#bs-navbar" data-toggle="collapse" type="button">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="glyphicon glyphicon-menu-hamburger"></span>
+                    </button>
+                    <a href="" class="navbar-brand">Home</a>
+                </div>
+                <nav class="collapse navbar-collapse" id="bs-navbar">
+                    <ul class="nav navbar-nav">
+                        <li> <a href="">Materias</a> </li>
+                        <li> <a href="">Tareas</a> </li>
+                        <li> <a href="">Deportes</a> </li>
+                        <li> <a href="">Otros</a> </li>
+                    </ul>
+                    <ul class="nav navbar-nav navbar-right navbar-inverse">
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                Estudiante: @nombre
+                                <span class="caret"></span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="#">Perfil</a></li>
+                                <li><a href="~/Estudiante/Login/GoLogout">Logout</a></li>
+                                <li><a href="#">About</a></li>
+                                <li><a href="#">Version 1.0.0</a></li>
+                            </ul>
+                        </li>
+                    </ul>
+                </nav>
+            </div>
+        </header>
+    }
+   
 
     <div class="container">       
         @RenderBody()

@@ -81,12 +81,19 @@ namespace Model.Model
                 {
                     if (e.ID > 0)//usuario que ya existe
                     {
+                        //intenta guardar sin pasar por la validacion de los campos requeridos
+                        ctx.Configuration.ValidateOnSaveEnabled = false;
                         //le decimos con el EntityState que se modifico y lo debe de updatear
-                        ctx.Entry(e).State = EntityState.Modified;
+                        var estu = ctx.Entry(e);
+                        estu.State = EntityState.Modified;
+                        if (string.IsNullOrEmpty(e.PWD)) {
+                            //excluye un campo de ser modificado
+                            estu.Property(x => x.PWD).IsModified = false;
+                        }
                     }
                     else
                     {//usuario nuevo
-                        //le decimos con el EntityState que se inserte
+                        //le decimos con el EntityState que se inserte                       
                         ctx.Entry(e).State = EntityState.Added;
                     }
                     ctx.SaveChanges();
@@ -166,6 +173,31 @@ namespace Model.Model
                 throw;
             }
             return e;
+        }
+        #endregion
+
+        #region GetEstudianteID...
+        public string GetNombreEstudiante(int id)
+        {
+            string nombre = "";
+            try
+            {
+                using (var ctx = new Dev001Context())
+                {
+                    nombre = ctx.ESTUDIANTE                                                
+                        .Where(x => x.ID == id)
+                        .Select(x => x.NOMBRE + " " + x.APELLIDO)                        
+                        .SingleOrDefault();
+
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine("Error DeleteEstudiante:{0}", ex.Message);
+                throw;
+            }
+            return nombre;
         }
         #endregion
     }
