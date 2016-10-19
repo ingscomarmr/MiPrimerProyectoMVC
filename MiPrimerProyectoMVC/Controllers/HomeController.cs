@@ -5,11 +5,13 @@ using System.Web;
 using System.Web.Mvc;
 using Model.Model;
 using System.IO;
+using Model.Services;
 
 namespace MiPrimerProyectoMVC.Controllers
 {
     public class HomeController : Controller
     {
+        EstudianteService estuService = new EstudianteService();
         // GET: Home 
         //localhost:xxxx/home/index
         public ActionResult Index()
@@ -21,7 +23,7 @@ namespace MiPrimerProyectoMVC.Controllers
         //localhost:xxxx/Home/Estudiantes
         public ActionResult Estudiantes()
         {
-            ViewBag.EstudiantesList = ESTUDIANTE.GetEstudianteList();
+            ViewBag.EstudiantesList = estuService.GetEstudianteList();
             return View();
         }
 
@@ -31,7 +33,7 @@ namespace MiPrimerProyectoMVC.Controllers
             {
                 return Redirect("~/home/Estudiantes"); //retorna
             }            
-            return View(ESTUDIANTE.GetEstudiante(id));            
+            return View(estuService.GetEstudiante(id));            
         }
 
         public ActionResult EstudianteEditar(int id, string mensage)
@@ -41,14 +43,14 @@ namespace MiPrimerProyectoMVC.Controllers
                 return Redirect("~/home/Estudiantes"); //retorna
             }*/
             ViewBag.Mensage = mensage;
-            return View(id==0? new ESTUDIANTE() : ESTUDIANTE.GetEstudiante(id));
+            return View(id==0? new ESTUDIANTE() : estuService.GetEstudiante(id));
         }
 
         public ActionResult EstudianteGuardar(ESTUDIANTE e)
         {
             if (ModelState.IsValid) //valida si el modelo es correcto
             {
-                ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante
+                estuService.SaveEstudiante(e); //Guarda el estudiante
                 //return Redirect("~/home/EstudianteEditar?id=" + e.ID + "&mensage=Datos Guardados"); //retorna con el mismo ID
                 return Redirect("~/home/Estudiantes"); //retorna
             }
@@ -65,7 +67,7 @@ namespace MiPrimerProyectoMVC.Controllers
 
             if (ModelState.IsValid) //valida si el modelo es correcto
             {
-                rm = ESTUDIANTE.SaveEstudiante(e); //Guarda el estudiante                
+                rm = estuService.SaveEstudiante(e); //Guarda el estudiante                
                 if (rm.response)
                 {
                     rm.message = "Se guardo correctamente la información!!";
@@ -85,7 +87,7 @@ namespace MiPrimerProyectoMVC.Controllers
                 //no tiene nada que eliminar
                 return Redirect("~/home/Estudiantes"); //retorna
             }
-            ESTUDIANTE.DeleteEstudiante(id); //Eliminar el estudiante
+            estuService.DeleteEstudiante(id); //Eliminar el estudiante
             return Redirect("~/home/Estudiantes"); //retorna
         }
 

@@ -1,10 +1,9 @@
 ﻿@{
     string controlador = ViewContext.RouteData.Values["Controller"].ToString().ToLower();
-
-    Model.Model.ESTUDIANTE estudiante = new Model.Model.ESTUDIANTE();
+    Model.Services.EstudianteService estuService = new Model.Services.EstudianteService();        
     string nombre = "";
     if (!controlador.Equals("login")) {
-        nombre = estudiante.GetNombreEstudiante(MiPrimerProyectoMVC.Utils.SessionUtils.GetUser());
+        nombre = estuService.GetNombreEstudiante(MiPrimerProyectoMVC.Utils.SessionUtils.GetUser());
     }
 
 }

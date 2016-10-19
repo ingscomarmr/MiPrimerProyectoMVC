@@ -4,11 +4,14 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using MiPrimerProyectoMVC.Tags;
+using Model.Services;
+using Model.Model;
 
 namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
 {
     public class LoginController : Controller
     {
+        EstudianteService estuService = new EstudianteService();
         // GET: Estudiante/Login
         public ActionResult Index()
         {
@@ -27,8 +30,8 @@ namespace MiPrimerProyectoMVC.Areas.Estudiante.Controllers
 
                 pwd = Utils.Encrypt.MD5(pwd);
 
-                Model.Model.ESTUDIANTE est = new Model.Model.ESTUDIANTE();
-                est = Model.Model.ESTUDIANTE.GetEstudiante(email, pwd);
+                ESTUDIANTE est = new Model.Model.ESTUDIANTE();
+                est = estuService.GetEstudiante(email, pwd);
 
                 if (est == null || est.ID <= 0)
                 {

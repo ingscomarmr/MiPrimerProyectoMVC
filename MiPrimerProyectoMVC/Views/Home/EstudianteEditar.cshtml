@@ -68,7 +68,7 @@
                <!--Si queremos poner html tradicional podemos hacer lo siguiente-->
                     <div class="form-group">
                         @Html.LabelFor(x => x.FECHA_NACIMIENTO)
-                        @Html.TextBoxFor(x => x.FECHA_NACIMIENTO, new { @class = "form-control" })
+                        @Html.TextBoxFor(x => x.FECHA_NACIMIENTO, new { @class = "form-control datepicker" })
                         @Html.ValidationMessageFor(x => x.FECHA_NACIMIENTO, null, new { @class = "label label-danger" })
                     </div>
 
