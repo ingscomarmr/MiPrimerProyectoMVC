@@ -88,7 +88,7 @@
                         <li> <a href="">Materias</a> </li>
                         <li> <a href="">Tareas</a> </li>
                         <li> <a href="">Deportes</a> </li>
-                        <li> <a href="">Otros</a> </li>
+                        <li> <a href="" data-toggle="modal" data-target=".mi-modal-contacto">Contactanos</a> </li>
                     </ul>
                     <ul class="nav navbar-nav navbar-right navbar-inverse">
                         <li class="dropdown">
@@ -119,6 +119,8 @@
     <script src="~/assets/js/jquery.validate.unobtrusive.min.js"></script>
     <script src="~/assets/js/init.forms.js"></script>
     <script src="~/assets/js/jquery.form.min.js"></script>
-    
+
+    @Html.Partial("~//_MoidalContacto.cshtml", new MiPrimerProyectoMVC.ViewModel.ContactoVM())
+
 </body>
 </html>

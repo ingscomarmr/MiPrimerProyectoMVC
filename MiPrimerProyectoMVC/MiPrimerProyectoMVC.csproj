@@ -152,6 +152,7 @@
     <Compile Include="Areas\Estudiante\Controllers\EstudianteController.cs" />
     <Compile Include="Areas\Estudiante\Controllers\LoginController.cs" />
     <Compile Include="Areas\Estudiante\EstudianteAreaRegistration.cs" />
+    <Compile Include="Controllers\ErrorController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\Utilidades\Utils.cs" />
     <Compile Include="Global.asax.cs">
@@ -161,6 +162,7 @@
     <Compile Include="Tags\Tags.cs" />
     <Compile Include="Utils\Encrypt.cs" />
     <Compile Include="Utils\SessionUtils.cs" />
+    <Compile Include="ViewModel\ContactoVM.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\web.config" />
@@ -185,6 +187,8 @@
     <Content Include="Areas\Estudiante\Views\_Viewstart.cshtml" />
     <Content Include="Areas\Estudiante\Views\Login\Index.cshtml" />
     <Content Include="Areas\Estudiante\Views\Estudiante\Index.cshtml" />
+    <Content Include="Areas\Estudiante\Views\Shared\_MoidalContacto.cshtml" />
+    <Content Include="Views\Error\Index.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

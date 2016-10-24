@@ -1,0 +1,44 @@
+﻿@model MiPrimerProyectoMVC.ViewModel.ContactoVM
+
+<!-- ### VENTANA MODAL PARA CONTACTO ### -->
+<div class="modal fade mi-modal-contacto" tabindex="-1" role="dialog">
+@using (Html.BeginForm("EnviarComentario", "Contacto", FormMethod.Post, new { id = "form-comentarios" }))
+{
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+                <h4 class="modal-title">Contactanos</h4>
+            </div>
+            <div class="modal-body">
+                
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.Correo)
+                        @Html.TextBoxFor(x => x.Correo, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Correo, null, new { @class = "label label-danger" })
+                    </div>
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.TituloMsg)
+                        @Html.TextBoxFor(x => x.TituloMsg, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.TituloMsg, null, new { @class = "label label-danger" })
+                    </div>
+                    <div class="form-group">
+                        <!--Este codigo es como poner html pero con ayuda del MVC-->
+                        @Html.LabelFor(x => x.Mensaje)
+                        @Html.TextAreaFor(x => x.Mensaje, new { @class = "form-control" })
+                        @Html.ValidationMessageFor(x => x.Mensaje, null, new { @class = "label label-danger" })
+                    </div>
+               
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-primary">Enviar</button>
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cerrar</button>                
+            </div>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+}
+</div><!-- /.modal -->
